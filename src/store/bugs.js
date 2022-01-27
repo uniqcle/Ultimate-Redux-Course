@@ -1,40 +1,44 @@
-//Action types
-const BUG_ADDED = "bugAdded"
-const BUG_REMOVED = "bugRemoved"
-const BUG_RESOLVED = "bugResolved"
+import { createAction, createReducer } from '@reduxjs/toolkit'
+
+const bugUpdated = createAction("bugUpdated")
+console.log(bugUpdated({ id: 1 }))
 
 //Action creators
-export const bugAdded = description => ({
-    type: BUG_ADDED,
-    payload: {
-        description
-    }
-})
-
-export const bugResolved = id => ({
-    type: BUG_RESOLVED,
-    payload: {
-        id
-    }
-})
-
-export function bugRemoved(id) {
-    return {
-        type: BUG_REMOVED,
-        payload: {
-            id
-        }
-    }
-}
-
+export const bugAdded = createAction("bugAdded")
+export const bugResolved = createAction("bugResolved")
+export const bugRemoved = createAction("bugRemoved")
 
 //Reducer
 let lastId = 0;
 
+
+export default createReducer([], {
+    //key: value
+    //actions: function(event => event handler)
+    [bugAdded.type]: (bugs, action) => {
+        bugs.push({
+            id: ++lastId,
+            description: action.payload.description,
+            resolved: false
+        })
+    },
+
+    [bugResolved.type]: (bugs, action) => {
+        const index = bugs.findIndex(bug => bug.id === action.payload.id)
+        bugs[index].resolved = true;
+    },
+
+    [bugRemoved.type]: (bugs, action) => {
+        return bugs.filter(bug => bug.id !== action.payload.id)
+    }
+})
+
+
+/*
 function reducer(state = [], action) {
 
     switch (action.type) {
-        case BUG_ADDED:
+        case bugAdded.type:
             return [
                 ...state,
                 {
@@ -44,10 +48,10 @@ function reducer(state = [], action) {
                 }
             ]
 
-        case BUG_REMOVED:
+        case bugRemoved.type:
             return state.filter(bug => bug.id !== action.payload.id)
 
-        case BUG_RESOLVED:
+        case bugResolved.type:
             return state.map(bug =>
                 bug.id !== action.payload.id ? bug : { ...bug, resolved: true }
             )
@@ -58,3 +62,4 @@ function reducer(state = [], action) {
 }
 
 export default reducer; 
+*/ 
