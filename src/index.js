@@ -1,13 +1,15 @@
-import store from './store_user/store'
-import { userAdded, userRemoved, userIsAdmin } from './store_user/actions'
+import configureStore from './store_user_ducks/configureStore'
+import * as actions from './store_user_ducks/users'
+
+const store = configureStore();
 
 const unsubscribe = store.subscribe(() => {
     console.log("store is changing...")
 })
 
 
-store.dispatch(userAdded(5))
-store.dispatch(userRemoved(5))
+store.dispatch(actions.userAdded(5))
+store.dispatch(actions.userRemoved(5))
 
-store.dispatch(userAdded(6))
-store.dispatch(userIsAdmin(6))
+store.dispatch(actions.userAdded(6))
+store.dispatch(actions.userIsAdmin(6))
