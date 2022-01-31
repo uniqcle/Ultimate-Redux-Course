@@ -27,5 +27,8 @@ const slice = createSlice({
     }
 })
 
+export const getInHandProjects = state =>
+    state.entities.projects.filter(p => p.inHand)
+
 export const { projectAdded, projectInHand, projectRemoved } = slice.actions;
 export default slice.reducer; 
