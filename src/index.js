@@ -1,4 +1,4 @@
-import configureStore from './store_projects/configureStore'
+import configureStore from './store/configureStore'
 import * as actions from './store_projects/projects'
 
 const store = configureStore();
