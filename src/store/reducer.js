@@ -4,5 +4,4 @@ import userReducer from '../store_user_ducks/users'
 
 export default combineReducers({
     entities: entitiesRducer,
-    users: userReducer
 })

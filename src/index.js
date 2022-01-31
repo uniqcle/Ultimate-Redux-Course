@@ -1,6 +1,7 @@
 import configureStore from './store/configureStore'
 import { projectAdded, projectInHand, projectRemoved, getInHandProjects } from './store_projects/projects'
-import { bugAdded, bugRemoved, bugResolved } from './store/bugs'
+import { bugAdded, bugRemoved, bugResolved, bugAssignedToUser, getUnresolvedBugs, getBugsByUser } from './store/bugs'
+import { userAdded } from './store/users';
 
 const store = configureStore();
 
@@ -21,7 +22,16 @@ store.dispatch(bugAdded({ description: "test1" }))
 store.dispatch(bugAdded({ description: "test2" }))
 store.dispatch(bugResolved({ id: 1 }))
 
-const unresolvedBugs = store.getState().entities.bugs.filter(bug => !bug.resolved)
+
+
+store.dispatch(bugAssignedToUser({ bugId: 1, userId: 1 }))
+
+
+store.dispatch(userAdded({ name: 'Uniqcle' }))
+
+const unresolvedBugs = getUnresolvedBugs(store.getState())
 const unresolvedProjects = getInHandProjects(store.getState())
 
-console.log(unresolvedProjects)
+const bugs = getBugsByUser(1)(store.getState())
+
+console.log(bugs)
