@@ -1,13 +1,30 @@
 import configureStore from './store/configureStore'
 import { projectAdded, projectInHand, projectRemoved, getInHandProjects } from './store_projects/projects'
-import { bugAdded, bugRemoved, bugResolved, bugAssignedToUser, getUnresolvedBugs, getBugsByUser } from './store/bugs'
+import { bugAdded, bugsReceived, bugRemoved, bugResolved, bugAssignedToUser, getUnresolvedBugs, getBugsByUser } from './store/bugs'
 import { userAdded } from './store/users';
 
 const store = configureStore();
 
-const unsubscribe = store.subscribe(() => {
-    console.log("store is changing...")
+store.dispatch((dispatch, getState) => {
+    //call an API
+    //When the promise is resolved => dispathc()
+    store.dispatch(bugAdded({ description: "name" }))
+    console.log(getState())
+
+    //If the promise is rejected => dispathc()
 })
+
+
+store.dispatch({
+    type: 'error',
+    payload: {
+        message: "An error occurred"
+    }
+})
+
+// const unsubscribe = store.subscribe(() => {
+//     console.log("store is changing...")
+// })
 
 // store.dispatch(projectAdded({ id: 3 }))
 // store.dispatch(projectAdded({ id: 4 }))
@@ -27,7 +44,7 @@ const unsubscribe = store.subscribe(() => {
 // store.dispatch(bugAssignedToUser({ bugId: 1, userId: 1 }))
 
 
-store.dispatch(userAdded({ name: 'Uniqcle' }))
+//store.dispatch(userAdded({ name: 'Uniqcle' }))
 
 // const unresolvedBugs = getUnresolvedBugs(store.getState())
 // const unresolvedProjects = getInHandProjects(store.getState())
