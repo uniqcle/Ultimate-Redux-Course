@@ -5,22 +5,25 @@ import { userAdded } from './store/users';
 
 const store = configureStore();
 
-store.dispatch((dispatch, getState) => {
-    //call an API
-    //When the promise is resolved => dispathc()
-    store.dispatch(bugAdded({ description: "name" }))
-    console.log(getState())
-
-    //If the promise is rejected => dispathc()
-})
 
 
-store.dispatch({
-    type: 'error',
-    payload: {
-        message: "An error occurred"
-    }
-})
+
+// store.dispatch((dispatch, getState) => {
+//     //call an API
+//     //When the promise is resolved => dispathc()
+//     store.dispatch(bugAdded({ description: "name" }))
+//     console.log(getState())
+
+//     //If the promise is rejected => dispathc()
+// })
+
+
+// store.dispatch({
+//     type: 'error',
+//     payload: {
+//         message: "An error occurred"
+//     }
+// })
 
 // const unsubscribe = store.subscribe(() => {
 //     console.log("store is changing...")
