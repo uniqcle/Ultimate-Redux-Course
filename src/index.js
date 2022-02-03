@@ -9,6 +9,8 @@ const store = configureStore();
 //UI Layer
 store.dispatch(loadBugs())
 
+setTimeout(() => store.dispatch(loadBugs()), 2000)
+
 // store.dispatch(actions.apiCallBegan({
 //     url: "/bugs",
 //     onSuccess: "bugs/bugsReceived",
