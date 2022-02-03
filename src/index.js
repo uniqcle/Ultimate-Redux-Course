@@ -2,14 +2,14 @@ import configureStore from './store/configureStore'
 import { projectAdded, projectInHand, projectRemoved, getInHandProjects } from './store_projects/projects'
 import { bugAdded, bugsReceived, bugRemoved, bugResolved, bugAssignedToUser, getUnresolvedBugs, getBugsByUser } from './store/bugs'
 import { userAdded } from './store/users';
-import { loadBugs } from './store/bugs'
+import { loadBugs, addBug } from './store/bugs'
 
 const store = configureStore();
 
 //UI Layer
-store.dispatch(loadBugs())
+store.dispatch(addBug({ description: "a" }))
 
-setTimeout(() => store.dispatch(loadBugs()), 2000)
+// setTimeout(() => store.dispatch(loadBugs()), 2000)
 
 // store.dispatch(actions.apiCallBegan({
 //     url: "/bugs",
